@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run -e CI=true alaena/tut-docker-react npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "ap-southeast-1"
+  app: "tut-docker-react"
+  env: "Tutdockerreact-env"
+  bucket_name: "elasticbeanstalk-ap-southeast-1-114626046508"
+  bucket_path: "tut-docker-react"
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
